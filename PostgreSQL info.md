@@ -117,3 +117,65 @@ psql -U david -d userDB
 If it works, the Spring Boot application should connect successfully.
 
 ---
+
+
+
+The error indicates that the user you are using to connect to the database does not have the necessary permissions to create tables in the `public` schema. Here's how to resolve this issue:
+
+---
+
+## **Solution: Grant Permissions to the User**
+
+1. **Log in as the Superuser (`postgres`)**  
+   Open a terminal or command prompt and log in to PostgreSQL using the `postgres` user:
+   ```bash
+   psql -U postgres
+   ```
+
+2. **Grant Necessary Permissions to the User**  
+   Replace `david` with your database username. Execute the following SQL commands:
+   ```sql
+   -- Connect to the target database
+   \c userDB
+
+   -- Grant usage and create privileges on the schema
+   GRANT USAGE ON SCHEMA public TO david;
+   GRANT CREATE ON SCHEMA public TO david;
+
+   -- Grant all privileges on the schema (if needed)
+   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO david;
+   GRANT ALL PRIVILEGES ON SCHEMA public TO david;
+   ```
+
+3. **Test the Permissions**  
+   Exit `psql` and test if the user can now create tables:
+   ```bash
+   psql -U david -d userDB
+   ```
+   Run a simple table creation SQL command to verify:
+   ```sql
+   CREATE TABLE test_table (id SERIAL PRIMARY KEY, name VARCHAR(255));
+   ```
+
+4. **Update Your Spring Boot Application**  
+   Restart your Spring Boot application. Hibernate should now successfully execute the DDL commands to create tables.
+
+---
+
+## **Alternative Solution: Change the Hibernate DDL Auto Setting**
+If you do not want Hibernate to manage schema creation, you can update the `application.properties` file to use an alternative schema generation strategy:
+```properties
+spring.jpa.hibernate.ddl-auto=validate
+```
+This will ensure that Hibernate validates the schema but does not attempt to create or modify it.
+
+---
+
+## **Why This Happens**
+The error occurs because the PostgreSQL user lacks:
+1. Usage privileges on the `public` schema.
+2. Create privileges on the `public` schema.
+3. Default privileges to create tables.
+
+By granting these permissions, you resolve the issue and allow Hibernate to manage schema creation as needed.
+
