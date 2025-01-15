@@ -49,7 +49,7 @@ public class User {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Certificate> certificateList;
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Discussion> discussions;
 
 
@@ -133,11 +133,4 @@ public class User {
         this.certificateList = certificateList;
     }
 
-    public List<Discussion> getDiscussions() {
-        return discussions;
-    }
-
-    public void setDiscussions(List<Discussion> discussions) {
-        this.discussions = discussions;
-    }
 }
