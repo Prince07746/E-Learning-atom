@@ -19,17 +19,21 @@ public class FeedBack {
 
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="course_id")
     private Course course;
+
 
     @Column(name = "rating")
     private int rating;
 
-    @Column(name = "rating")
+
+    @Column(name = "comment")
     private String comment;
+
 
     @Column(name = "createdAt")
     private java.sql.Timestamp createdAt;
+
 
     public int getId() {
         return id;
