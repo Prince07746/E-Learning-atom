@@ -2,6 +2,7 @@ package org.elearning.project.model;
 
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,10 +68,12 @@ public class User {
         this.role = role;
     }
 
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
+
 
     public User() {
     }
@@ -154,5 +157,8 @@ public class User {
     public void setCertificateList(List<Certificate> certificateList) {
         this.certificateList = certificateList;
     }
+
+
+
 
 }

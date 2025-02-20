@@ -26,9 +26,6 @@ public class Comment {
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
 
-
-
-
     public Long getId() {
         return id;
     }

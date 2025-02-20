@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/studentDashbord.css"/>
+
+
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- script -->
+    <script src="/js/studentDashBord.js"></script>
+    <!-- Unicons CSS -->
+    <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <!-- boxicon -->
+    <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+    />
+</head>
+
+<style>
+    :root {
+        --primary-color: #4a98f7;
+        --secondary-color: #f9f9f9;
+        --text-color: #333;
+        --bg-color: #f0faff;
+    }
+</style>
+<body>
+<nav class="nav">
+    <i class="uil uil-bars navOpenBtn"></i>
+    <a href="#" class="logo">AtomTechDM</a>
+
+    <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+    <i class="uil uil-search search-icon" id="searchIcon"></i>
+    <div class="search-box">
+        <i class="uil uil-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search here..."/>
+    </div>
+</nav>
+
+<div class="search-results" id="searchResults"></div>
+
+
+<section class="dashboard-student">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2><i class='bx bxs-graduation'></i> E-Learn</h2>
+        <ul>
+            <li class="active"><i class='bx bx-home'></i> Dashboard</li>
+            <li><i class='bx bx-book'></i> My Courses</li>
+            <li><i class='bx bx-user'></i> Profile</li>
+            <li><i class='bx bx-cog'></i> Settings</li>
+            <li class="logout"><i class='bx bx-log-out'></i> <a href="/logout"
+                                                                style="color:white;text-decoration: none">Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Dashboard Sections -->
+    <section id="dashboard" class="dashboard content-section">
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <div class="welcome">
+                    <h2>Welcome Back, <span id="studentName" th:text="${userinfo.name}"></span>!</h2>
+                </div>
+                <div class="profile">
+                    <i class='bx bx-bell'></i>
+                    <img src="/images/image.png" alt="Profile">
+                </div>
+            </header>
+
+            <!-- Stats Section -->
+            <section class="stats">
+                <div class="stat-box">
+                    <i class='bx bx-book-bookmark'></i>
+                    <div th:if="${Courses.size() > 0}">
+                        <h3 th:text="${Courses.size()}">0</h3>
+                        <p>Enrolled Courses</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class='bx bx-task'></i>
+                    <div>
+                        <h3>5</h3>
+                        <p>Completed Assignments</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class='bx bx-certification'></i>
+                    <div th:if="${Certificates.size() > 0}">
+                        <h3 th:text="${Certificates.size()}">0</h3>
+                        <p>Certificates Earned</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Progress -->
+            <section class="courses">
+                <h3>My Courses</h3>
+
+                <div class="course">
+                    <p th:if="${#lists.isEmpty(Courses)}">No courses available.</p>
+                </div>
+
+                <div class="course" th:each="course :${Courses}">
+                    <div class="course-info">
+                        <a href="" th:text="${course.name}"></a>
+                        <p></p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <h2 id="certification">Certification</h2>
+            <div class="certifications-container">
+
+                <div class="cert-card">
+                    <p th:if="${#lists.isEmpty(Certificates)}">No courses available.</p>
+                </div>
+                <div class="cert-card" th:each=" certificate: ${Certificates}">
+                    <div class="cert-title" th:text="${certificate.name}">Java Programming</div>
+                    <div class="cert-date" th:text="${certificate.issueDate}">Obtained: March 2024</div>
+                    <a href="certificates/java_certificate.pdf" class="cert-file" download>
+                        <i class='bx bxs-file-pdf'></i> Download Certificate
+                    </a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <section id="mycourses" class="content-section hidden">
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h3>My Courses</h3>
+
+            <div class="analytics">
+                <div class="stat">
+                    <h4>Courses</h4>
+                    <p id="totalCourses">0</p>
+                </div>
+                <div class="stat">
+                    <h4>Completed</h4>
+                    <p id="completedCourses">0</p>
+                </div>
+                <div class="stat">
+                    <h4>In Progress</h4>
+                    <p id="inProgressCourses">0</p>
+                </div>
+            </div>
+
+            <!-- Chart to show progress -->
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <!-- Course List -->
+            <div class="course-list">
+                <h4>All Courses</h4>
+                <ul id="courseList">
+                    <!-- Courses will be dynamically added here -->
+                </ul>
+            </div>
+
+
+        </div>
+        <!-- Add course content -->
+    </section>
+
+
+    <section id="profile" class="content-section hidden">
+
+        <div class="main-content">
+
+            <div class="profile-container">
+                <div class="profile-header">Edit Profile</div>
+
+                <!-- Profile Picture -->
+                <div class="profile-pic">
+                    <img src="/images/image.png" alt="Profile Picture">
+                    <button class="btn-change">Change</button>
+                </div>
+
+                <!-- Full Name -->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" th:field="${userinfo.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <input type="text" value="">
+                    </div>
+                </div>
+
+                <!-- Username & Email -->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="input-group">
+                            <span>Eduport.com</span>
+                            <input type="text" th:field="${userinfo.name}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email ID</label>
+                        <input type="email" th:field="${userinfo.email}">
+                    </div>
+                </div>
+
+                <!-- Phone & Location -->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" value="">
+                    </div>
+                </div>
+
+                <!-- About Me -->
+                <div class="form-group">
+                    <label>About Me</label>
+                    <textarea rows="3">I've found a way to get paid for my favorite hobby, and do so while following my dream of traveling the world.</textarea>
+                </div>
+                <!-- Password Section -->
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-container">
+                        <input type="text" id="password" th:field="${userinfo.password}">
+                        <box-icon id="togglePassword" name='eye' type='solid'></box-icon>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <button class="btn-save">Save Changes</button>
+            </div>
+
+
+        </div>
+        <!-- Add profile content -->
+    </section>
+
+
+    <section id="settings" class="content-section hidden">
+
+        <div class="main-content">
+
+            <div class="settings-container">
+
+
+                <!-- Profile Settings -->
+                <div class="section">
+                    <h4>Profile Settings</h4>
+                    <div class="toggle-group">
+                        <label>Your profile's public visibility</label>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="section">
+                    <h4>Notifications Settings</h4>
+                    <p>Choose type of notifications you want to receive</p>
+
+                    <div class="toggle-group">
+                        <label>Notify me via email when logging in</label>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-group">
+                        <label>Send SMS confirmation for all online payments</label>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-group">
+                        <label>Check which device(s) access your account</label>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-group">
+                        <label>Show your profile publicly</label>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <label>
+
+                            <a href="" style="background-color: red;
+                      border: none; outline: none; border-radius: 5px; 
+                      color: white; padding: 5px; font-size: 12px;
+                      text-decoration: none;
+                      ">Delete Account</a>
+                        </label>
+                        <label class="switch">
+
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button class="btn btn-primary">Save changes</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- Add settings content -->
+    </section>
+
+
+</section>
+
+
+<!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
+<footer>
+    <div class="contentFooter">
+        <div class="top">
+            <div class="logo-details">
+                <i class="fab fa-slack"></i>
+                <span class="logo_name">AtomTechDM</span>
+            </div>
+            <div class="media-icons">
+                <a href="#"><i class="bx bxl-facebook"></i></a>
+                <a href="#"><i class="bx bxl-twitter"></i></a>
+                <a href="#"><i class="bx bxl-instagram"></i></a>
+                <a href="#"><i class="bx bxl-linkedin"></i></a>
+                <a href="#"><i class="bx bxl-youtube"></i></a>
+            </div>
+        </div>
+        <div class="link-boxes">
+            <ul class="box">
+                <li class="link_name">Company</li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Get started</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Services</li>
+                <li><a href="#">App design</a></li>
+                <li><a href="#">Web design</a></li>
+                <li><a href="#">Logo design</a></li>
+                <li><a href="#">Banner design</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Account</li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">My account</a></li>
+                <li><a href="#">Prefrences</a></li>
+                <li><a href="#">Purchase</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Courses</li>
+                <li><a href="#">HTML & CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+                <li><a href="#">Photography</a></li>
+                <li><a href="#">Photoshop</a></li>
+            </ul>
+            <ul class="box input-box">
+                <li class="link_name">Subscribe</li>
+                <li><input type="text" placeholder="Enter your email"/></li>
+                <li><input type="button" value="Subscribe"/></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom-details">
+        <div class="bottom_text">
+          <span class="copyright_text"
+          >Copyright © 2025 <a href="#">AtomTechDM</a>All rights
+            reserved</span
+          >
+            <span class="policy_terms">
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms & condition</a>
+          </span>
+        </div>
+    </div>
+</footer>
+
+<!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
+
+<script>
+
+    var user = {}
+    user.append()
+
+</script>
+
+</body>
+</html>
