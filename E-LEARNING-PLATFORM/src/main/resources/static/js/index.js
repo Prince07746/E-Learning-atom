@@ -30,24 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (searchInput) { 
-      searchInput.addEventListener("input", () => {
+      searchInput.addEventListener("input", async () => {
 
 
-
-        if (window.scrollY > 0) {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
+          if (window.scrollY > 0) {
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
+          }
 
 
           const searchTerm = searchInput.value.toLowerCase();
-          searchResults.innerHTML = ""; 
+          searchResults.innerHTML = "";
 
           if (searchTerm.length > 0) {
-              const results = getSearchResults(searchTerm);
+              const results = await getSearchResults(searchTerm);
 
               if (results.length > 0) {
                   results.forEach(result => {
@@ -79,16 +77,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  function getSearchResults(searchTerm) {
-      const sampleCourses = [
-          { title: "JavaScript Basics", description: "Learn the fundamentals of JavaScript.", image: "course.png", link: "#" },
-          { title: "HTML & CSS", description: "Master web development with HTML and CSS.", image: "image.png", link: "#" },
-          { title: "HTML & CSS", description: "Master web development with HTML and CSS.", image: "course.png", link: "#" },
-          { title: "React for Beginners", description: "Introduction to building UI with React.", image: "image.png", link: "#" },
-          { title: "Python for Data Science", description: "Dive into data analysis with Python.", image: "course.png", link: "#" },
-          { title: "Python for Data Science", description: "Dive into data analysis with Python.", image: "image.png", link: "#" }
-      ];
-      return sampleCourses.filter(course => course.title.toLowerCase().includes(searchTerm));
+
+  //  search request await async
+
+  async function getSearchResults(searchTerm) {
+
+      try{
+          let response = await fetch(`/search/course?query=${encodeURIComponent(searchTerm)}`)
+          if(!response.ok){
+              throw new Error("Failed to fetch courses");
+          }
+
+          return await response.json();
+
+      } catch (Error){
+          console.log(Error);
+          return []
+      }
   }
 
   document.addEventListener("click", (event) => {
@@ -187,58 +192,21 @@ window.addEventListener("load", initSlider);
 
 
 // script.js
+
+
 document.addEventListener('DOMContentLoaded', () => {
+
+
+
     const coursesContainer = document.querySelector('.courses');
     const filterButtons = document.querySelectorAll('.filter');
 
-    const coursesData = [
-        {
-            image: 'course.png', // Replace with your image paths
-            level: 'All level',
-            title: 'Sketch from A to Z: for app designer',
-            description: 'Proposal indulged no do sociable he throwing settling.',
-            rating: 2,
-            duration: '12h 56m',
-            lectures: '15 lectures',
-            category: 'web'
-        },
-        {
-            image: 'image.png',
-            level: 'Beginner',
-            title: 'Graphic Design Masterclass',
-            description: 'Rooms oh fully taken by worse do. Points afraid but may end Rooms...',
-            rating: 4,
-            duration: '9h 56m',
-            lectures: '65 lectures',
-            category: 'graphic'
-        },
-        {
-            image: 'course.png',
-            level: 'Beginner',
-            title: 'Create a Design System in Figma',
-            description: 'Rooms oh fully taken by worse do. Points afraid but may end afraid but....',
-            rating: 3,
-            duration: '5h 56m',
-            lectures: '32 lectures',
-            category: 'graphic'
-        },
-        {
-            image: 'image.png',
-            level: 'Beginner',
-            title: 'Deep Learning with React-Native',
-            description: 'Far advanced settling say finished raillery. Offered chiefly farther',
-            rating: 5,
-            duration: '18h 56m',
-            lectures: '99 lectures',
-            category: 'dev'
-        },
-        // Add more course data here
-    ];
 
     function displayCourses(category = 'all') {
         coursesContainer.innerHTML = ''; // Clear previous courses
 
-        const filteredCourses = category === 'all' ? coursesData : coursesData.filter(course => course.category === category);
+        const filteredCourses = category === 'all' ? coursesDataLatest : coursesDataLatest.
+        filter(course => course.category === category);
 
         filteredCourses.forEach(course => {
             const courseDiv = document.createElement('div');
@@ -274,8 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
 
 
 

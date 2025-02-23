@@ -29,106 +29,84 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    if (searchInput) {
-      searchInput.addEventListener("input", () => {
-        if (window.scrollY > 0) {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }
+    if (searchInput) { 
+      searchInput.addEventListener("input", async () => {
 
-        const searchTerm = searchInput.value.toLowerCase();
-        searchResults.innerHTML = "";
 
-        if (searchTerm.length > 0) {
-          const results = getSearchResults(searchTerm);
-
-          if (results.length > 0) {
-            results.forEach((result) => {
-              const resultCard = document.createElement("a");
-              resultCard.href = result.link;
-              resultCard.classList.add("search-card");
-
-              resultCard.innerHTML = `
-                                <img src="${result.image}" alt="${result.title}">
-                                <div class="search-info">
-                                    <h3>${result.title}</h3>
-                                    <p>${result.description}</p>
-                                </div>
-                            `;
-
-              searchResults.appendChild(resultCard);
-            });
-            searchResults.classList.add("show");
-          } else {
-            const noResults = document.createElement("p");
-            noResults.textContent = "No results found.";
-            searchResults.appendChild(noResults);
-            searchResults.classList.add("show");
+          if (window.scrollY > 0) {
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
           }
-        } else {
-          searchResults.classList.remove("show");
-        }
+
+
+          const searchTerm = searchInput.value.toLowerCase();
+          searchResults.innerHTML = "";
+
+          if (searchTerm.length > 0) {
+              const results = await getSearchResults(searchTerm);
+
+              if (results.length > 0) {
+                  results.forEach(result => {
+                      const resultCard = document.createElement("a");
+                      resultCard.href = result.link;
+                      resultCard.classList.add("search-card");
+                      var imageSrc = `/images/${result.image}`;
+                      console.dir(imageSrc);
+                      resultCard.innerHTML = `
+                          <img src="${imageSrc}" alt="${result.title}">
+                          <div class="search-info">
+                              <h3>${result.title}</h3>
+                              <p>${result.description}</p>
+                          </div>
+                      `;
+
+                      searchResults.appendChild(resultCard);
+                  });
+                  searchResults.classList.add("show");
+              } else {
+                  const noResults = document.createElement("p");
+                  noResults.textContent = "No results found.";
+                  searchResults.appendChild(noResults);
+                  searchResults.classList.add("show");
+              }
+          } else {
+              searchResults.classList.remove("show");
+          }
       });
-    }
+  }
 
-    function getSearchResults(searchTerm) {
-      const sampleCourses = [
-        {
-          title: "JavaScript Basics",
-          description: "Learn the fundamentals of JavaScript.",
-          image: "course.png",
-          link: "#",
-        },
-        {
-          title: "HTML & CSS",
-          description: "Master web development with HTML and CSS.",
-          image: "image.png",
-          link: "#",
-        },
-        {
-          title: "HTML & CSS",
-          description: "Master web development with HTML and CSS.",
-          image: "course.png",
-          link: "#",
-        },
-        {
-          title: "React for Beginners",
-          description: "Introduction to building UI with React.",
-          image: "image.png",
-          link: "#",
-        },
-        {
-          title: "Python for Data Science",
-          description: "Dive into data analysis with Python.",
-          image: "course.png",
-          link: "#",
-        },
-        {
-          title: "Python for Data Science",
-          description: "Dive into data analysis with Python.",
-          image: "image.png",
-          link: "#",
-        },
-      ];
-      return sampleCourses.filter((course) =>
-        course.title.toLowerCase().includes(searchTerm)
-      );
-    }
 
-    document.addEventListener("click", (event) => {
-      if (!event.target.closest(".search-box")) {
-        searchResults.classList.remove("show");
+  //  search request await async
+
+  async function getSearchResults(searchTerm) {
+
+      try{
+          let response = await fetch(`/search/course?query=${encodeURIComponent(searchTerm)}`)
+          if(!response.ok){
+              throw new Error("Failed to fetch courses");
+          }
+
+          return await response.json();
+
+      } catch (Error){
+          console.log(Error);
+          return []
       }
-    });
+  }
+
+  document.addEventListener("click", (event) => {
+      if (!event.target.closest('.search-box')) {
+          searchResults.classList.remove("show");
+      }
   });
 
 
 
 
 
-  document.addEventListener("DOMContentLoaded", function () {
+
     // Get all menu items and sections
     const menuItems = document.querySelectorAll(".sidebar ul li");
     const sections = document.querySelectorAll(".content-section");
@@ -152,23 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-});
 
 
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  const courses = [
-      { name: "Web Development", progress: 80 ,href:""},
-      { name: "Machine Learning", progress: 50 ,href:""},
-      { name: "Java Programming", progress: 90 ,href:""},
-      { name: "Cyber Security", progress: 60 ,href:""},
-      { name: "Cyber Security", progress: 60 ,href:""}
-  ];
 
   const totalCourses = courses.length;
-  const completedCourses = courses.filter(course => course.progress === 100).length;
+  const completedCourses = courses.filter(course => course.status === "COMPLETED").length;
   const inProgressCourses = totalCourses - completedCourses;
 
   // Update analytics
@@ -181,8 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
   courses.forEach(course => {
 
       const li = document.createElement("li");
-
-      li.innerHTML = `<a href="${course.href}">${course.name}</a> <span>${course.progress}% </span>`;
+      li.innerHTML = `<a href="/course/${course.id}">${course.name}</a> <span>${course.progress}% </span>`;
       courseList.appendChild(li);
   });
 
@@ -211,4 +179,3 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   });
 });
-

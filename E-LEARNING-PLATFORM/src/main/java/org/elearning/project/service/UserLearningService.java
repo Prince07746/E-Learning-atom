@@ -1,7 +1,6 @@
 package org.elearning.project.service;
 
 import jakarta.transaction.Transactional;
-import org.elearning.project.DTO.DashBoardData;
 import org.elearning.project.model.Certificate;
 import org.elearning.project.model.Course;
 import org.elearning.project.model.Subscription;

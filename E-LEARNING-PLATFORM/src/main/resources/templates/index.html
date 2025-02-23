@@ -94,7 +94,7 @@
             <button class="filter" data-category="finance">Finance</button>
         </div>
         <div class="courses">
-            </div>
+        </div>
     </div>
 
 
@@ -145,112 +145,32 @@
 
 
      <!-- ---------------------- course   ------------------------------- -->
-      <div class="course-card">
+      <div class="course-card" th:each="courseListRating :${courseListRating}">
         <img class="course-image" src="/images/image.png" alt="Course Image">
         <div class="course-details">
           <div class="tags">
             <span class="tag development">Development</span>
-            <span class="tag level">All level</span>
+            <span class="tag level" th:text="${courseListRating.level}"></span>
           </div>
-          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
+          <a th:href="@{/course/{id} (id=${courseListRating.id})}" class="course-title"
+             th:text="${courseListRating.title}"></a>
           <div class="rating">
-            <span>⭐ 4.5</span>
-            <span>(4200)</span>
-            <span>5000 <small>(Student)</small></span>
+            <span>⭐<span th:text="${courseListRating.rating}"> 4.5</span></span>
+            <span>+500 <small>(Student)</small></span>
           </div>
           <div class="course-info">
-            <span>⏳ 14h 30m</span>
-            <span>📚 75 lectures</span>
+              <span><span th:text="${courseListRating.duration}"> </span>⏳ </span>
+            <span>📚 <span th:text="${courseListRating.lessonList.size()}">5<span> lectures</span>
           </div>
           <div class="instructor">
             <img class="instructor-img" th:src="@{images/course.png}" alt="Instructor">
-            <span>John Doe</span>
+            <span th:text="${courseListRating.teacher.name}">John Doe</span>
           </div>
-          <div class="price">$299</div>
+          <div class="price" th:text="${courseListRating.price}">FREE</div>
         </div>
       </div>
       <!-- ----------------------------------------------------------- -->
 
-     <!-- ---------------------- course   ------------------------------- -->
-      <div class="course-card">
-        <img class="course-image" src="/images/image.png" alt="Course Image">
-        <div class="course-details">
-          <div class="tags">
-            <span class="tag development">Development</span>
-            <span class="tag level">All level</span>
-          </div>
-          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
-          <div class="rating">
-            <span>⭐ 4.5</span>
-            <span>(4200)</span>
-            <span>5000 <small>(Student)</small></span>
-          </div>
-          <div class="course-info">
-            <span>⏳ 14h 30m</span>
-            <span>📚 75 lectures</span>
-          </div>
-          <div class="instructor">
-            <img class="instructor-img" src="/images/course.png" alt="Instructor">
-            <span>John Doe</span>
-          </div>
-          <div class="price">$299</div>
-        </div>
-      </div>
-      <!-- ----------------------------------------------------------- -->
-
-     <!-- ---------------------- course   ------------------------------- -->
-      <div class="course-card">
-        <img class="course-image" src="/images/image.png" alt="Course Image">
-        <div class="course-details">
-          <div class="tags">
-            <span class="tag development">Development</span>
-            <span class="tag level">All level</span>
-          </div>
-          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
-          <div class="rating">
-            <span>⭐ 4.5</span>
-            <span>(4200)</span>
-            <span>5000 <small>(Student)</small></span>
-          </div>
-          <div class="course-info">
-            <span>⏳ 14h 30m</span>
-            <span>📚 75 lectures</span>
-          </div>
-          <div class="instructor">
-            <img class="instructor-img" src="/images/course.png" alt="Instructor">
-            <span>John Doe</span>
-          </div>
-          <div class="price">$299</div>
-        </div>
-      </div>
-      <!-- ----------------------------------------------------------- -->
-
-     <!-- ---------------------- course   ------------------------------- -->
-      <div class="course-card">
-        <img class="course-image" src="/images/image.png" alt="Course Image">
-        <div class="course-details">
-          <div class="tags">
-            <span class="tag development">Development</span>
-            <span class="tag level">All level</span>
-          </div>
-          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
-          <div class="rating">
-            <span>⭐ 4.5</span>
-            <span>(4200)</span>
-            <span>5000 <small>(Student)</small></span>
-          </div>
-          <div class="course-info">
-            <span>⏳ 14h 30m</span>
-            <span>📚 75 lectures</span>
-          </div>
-          <div class="instructor">
-            <img class="instructor-img" src="/images/course.png" alt="Instructor">
-            <span>John Doe</span>
-          </div>
-          <div class="price">$299</div>
-        </div>
-      </div>
-      <!-- ----------------------------------------------------------- -->
 
 
     </ul>
@@ -369,7 +289,13 @@
   <!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
 
 
+<script th:inline="javascript">
 
+    let coursesDataLatest = /*[[${courseListLates}]]*/ [];
+    let courseDataRating = /*[[${courseListRating}]]*/ [];
+
+
+</script>
 
 
 

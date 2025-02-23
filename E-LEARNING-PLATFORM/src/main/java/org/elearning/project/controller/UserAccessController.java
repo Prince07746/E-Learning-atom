@@ -4,13 +4,17 @@ package org.elearning.project.controller;
 import jakarta.transaction.Transactional;
 import org.elearning.project.DTO.DashBoardData;
 import org.elearning.project.model.*;
+import org.elearning.project.service.CourseService;
 import org.elearning.project.service.UserLearningService;
 import org.elearning.project.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,28 +23,47 @@ public class UserAccessController {
 
     private final UserManagementService userManagementService;
     private final UserLearningService userLearningService;
+    private final CourseService courseService;
     private User userLogin = null;
 
     @Autowired
-    public UserAccessController(UserManagementService userManagementService, UserLearningService userLearningService) {
+    public UserAccessController(UserManagementService userManagementService,
+                                UserLearningService userLearningService,
+                                CourseService courseService) {
+
         this.userManagementService = userManagementService;
         this.userLearningService = userLearningService;
+        this.courseService = courseService;
     }
 
 
     // home
     @GetMapping("/")
     public String home(Model model) {
+
+        Pageable pageable = PageRequest.of(0,10);
+        Pageable pageableByRating = PageRequest.of(0,10);
+
+        List<Course> courseListLatest = courseService.getCoursesListByPage(pageable);
+
+        List<Course> courseListRating = courseService.getCoursesListByPageRating(pageableByRating);
+
+
+
         if (userLogin != null) {
             model.addAttribute("authentication", "Logout");
             model.addAttribute("authenticationLink", "logout");
             model.addAttribute("dashboard", "Dashboard");
             model.addAttribute("dashboardLink", "/dashboard/" + userLogin.getId());
+            model.addAttribute("courseListLates",courseListLatest);
+            model.addAttribute("courseListRating",courseListRating);
         } else {
             model.addAttribute("authentication", "Login");
             model.addAttribute("authenticationLink", "login");
             model.addAttribute("dashboard", "");
             model.addAttribute("dashboardLink", "");
+            model.addAttribute("courseListLates",courseListLatest);
+            model.addAttribute("courseListRating",courseListRating);
         }
 
         return "index";
@@ -97,7 +120,6 @@ public class UserAccessController {
 
     //    dashboard
     @GetMapping("/dashboard/{id}")
-    @Transactional
     public String dashboard(@PathVariable(name = "id") int id, Model model) {
         String link = "redirect:/login"; // Default to redirect if user is not authenticated
 
@@ -106,17 +128,17 @@ public class UserAccessController {
 
 
                 model.addAttribute("Courses", userLearningService.getCourses(userLogin));
-
                 model.addAttribute("Certificates", userLearningService.getCertificateList(userLogin));
                 model.addAttribute("userinfo", userLogin);
                 link = "dashboardStudent";
 
             } else if (userLogin.getRole().equals(Enum.valueOf(Role.class, "TEACHER")) && userLogin.getId() == id) {
 
-
-                User teacher = userLogin;
-                model.addAttribute("userinfo", teacher);
+                model.addAttribute("Courses", userLearningService.getCourses(userLogin));
+                model.addAttribute("Certificates", userLearningService.getCertificateList(userLogin));
+                model.addAttribute("userinfo", userLogin);
                 link = "dashboardStudent";
+
             }
 
         }
