@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Unicons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <!-- boxicon -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    :root {
+      --primary-color: #4a98f7;
+      --secondary-color: #f9f9f9;
+      --text-color: #333;
+      --bg-color: #f0faff;
+    }
+    center h1 {
+      font-size: 5rem;
+      color: var(--primary-color);
+      margin-top: 15rem;
+    }
+    center p {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      margin-top: 0.2rem;
+      margin-bottom: 7rem;
+    }
+  </style>
+  <body>
+    <nav class="nav">
+      <i class="uil uil-bars navOpenBtn"></i>
+      <a href="#" class="logo">AtomTechDM</a>
+
+      <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+
+      <i class="uil uil-search search-icon" id="searchIcon"></i>
+      <div class="search-box">
+        <i class="uil uil-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search here..." />
+      </div>
+    </nav>
+
+    <div class="search-results" id="searchResults"></div>
+
+    <center>
+      <h1>404</h1>
+      <p>Oops! The page you're looking for doesn't exist.</p>
+    </center>
+
+    <!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
+    <footer>
+      <div class="contentFooter">
+        <div class="top">
+          <div class="logo-details">
+            <i class="fab fa-slack"></i>
+            <span class="logo_name">AtomTechDM</span>
+          </div>
+          <div class="media-icons">
+            <a href="#"><i class="bx bxl-facebook"></i></a>
+            <a href="#"><i class="bx bxl-twitter"></i></a>
+            <a href="#"><i class="bx bxl-instagram"></i></a>
+            <a href="#"><i class="bx bxl-linkedin"></i></a>
+            <a href="#"><i class="bx bxl-youtube"></i></a>
+          </div>
+        </div>
+        <div class="link-boxes">
+          <ul class="box">
+            <li class="link_name">Company</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Get started</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Services</li>
+            <li><a href="#">App design</a></li>
+            <li><a href="#">Web design</a></li>
+            <li><a href="#">Logo design</a></li>
+            <li><a href="#">Banner design</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Account</li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">My account</a></li>
+            <li><a href="#">Prefrences</a></li>
+            <li><a href="#">Purchase</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Courses</li>
+            <li><a href="#">HTML & CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">Photography</a></li>
+            <li><a href="#">Photoshop</a></li>
+          </ul>
+          <ul class="box input-box">
+            <li class="link_name">Subscribe</li>
+            <li><input type="text" placeholder="Enter your email" /></li>
+            <li><input type="button" value="Subscribe" /></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-details">
+        <div class="bottom_text">
+          <span class="copyright_text"
+            >Copyright © 2025 <a href="#">AtomTechDM</a>All rights
+            reserved</span
+          >
+          <span class="policy_terms">
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms & condition</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav");
+        const searchIcon = document.querySelector("#searchIcon");
+        const navOpenBtn = document.querySelector(".navOpenBtn");
+        const navCloseBtn = document.querySelector(".navCloseBtn");
+        const searchInput = document.getElementById("searchInput");
+        const searchResults = document.getElementById("searchResults");
+
+        if (searchIcon) {
+          searchIcon.addEventListener("click", () => {
+            nav.classList.toggle("openSearch");
+            nav.classList.remove("openNav");
+            searchIcon.classList.toggle("uil-times");
+            searchIcon.classList.toggle("uil-search");
+          });
+        }
+
+        if (navOpenBtn) {
+          navOpenBtn.addEventListener("click", () => {
+            nav.classList.add("openNav");
+            nav.classList.remove("openSearch");
+            searchIcon.classList.replace("uil-times", "uil-search");
+          });
+        }
+
+        if (navCloseBtn) {
+          navCloseBtn.addEventListener("click", () => {
+            nav.classList.remove("openNav");
+          });
+        }
+
+        if (searchInput) {
+          searchInput.addEventListener("input", () => {
+            if (window.scrollY > 0) {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }
+
+            const searchTerm = searchInput.value.toLowerCase();
+            searchResults.innerHTML = "";
+
+            if (searchTerm.length > 0) {
+              const results = getSearchResults(searchTerm);
+
+              if (results.length > 0) {
+                results.forEach((result) => {
+                  const resultCard = document.createElement("a");
+                  resultCard.href = result.link;
+                  resultCard.classList.add("search-card");
+
+                  resultCard.innerHTML = `
+                                    <img src="${result.image}" alt="${result.title}">
+                                    <div class="search-info">
+                                        <h3>${result.title}</h3>
+                                        <p>${result.description}</p>
+                                    </div>
+                                `;
+
+                  searchResults.appendChild(resultCard);
+                });
+                searchResults.classList.add("show");
+              } else {
+                const noResults = document.createElement("p");
+                noResults.textContent = "No results found.";
+                searchResults.appendChild(noResults);
+                searchResults.classList.add("show");
+              }
+            } else {
+              searchResults.classList.remove("show");
+            }
+          });
+        }
+
+        function getSearchResults(searchTerm) {
+          const sampleCourses = [
+            {
+              title: "JavaScript Basics",
+              description: "Learn the fundamentals of JavaScript.",
+              image: "course.png",
+              link: "#",
+            },
+            {
+              title: "HTML & CSS",
+              description: "Master web development with HTML and CSS.",
+              image: "image.png",
+              link: "#",
+            },
+            {
+              title: "HTML & CSS",
+              description: "Master web development with HTML and CSS.",
+              image: "course.png",
+              link: "#",
+            },
+            {
+              title: "React for Beginners",
+              description: "Introduction to building UI with React.",
+              image: "image.png",
+              link: "#",
+            },
+            {
+              title: "Python for Data Science",
+              description: "Dive into data analysis with Python.",
+              image: "course.png",
+              link: "#",
+            },
+            {
+              title: "Python for Data Science",
+              description: "Dive into data analysis with Python.",
+              image: "image.png",
+              link: "#",
+            },
+          ];
+          return sampleCourses.filter((course) =>
+            course.title.toLowerCase().includes(searchTerm)
+          );
+        }
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".search-box")) {
+            searchResults.classList.remove("show");
+          }
+        });
+        
+      });
+    </script>
+  </body>
+</html>

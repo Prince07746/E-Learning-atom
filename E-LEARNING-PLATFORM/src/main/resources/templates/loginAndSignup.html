@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/loginAndSignup.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">
+            Login Form
+        </div>
+        <div class="title signup">
+            Signup Form
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+
+
+
+            <form action="/login" method="post" th:object="${user}" class="login">
+
+                <div class="field">
+                    <input  name="email" type="email" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <input   name="password" type="password" placeholder="Password" required>
+                </div>
+                <div class="pass-link">
+                    <a href="#">Forgot password?</a>
+                    <br>
+                    <br>
+                    <!-- This will pop up if the password or email is wrong-->
+                    <p th:text="${loginCheck}" style="color:red;"></p>
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Login">
+                </div>
+                <div class="signup-link">
+                    Not a member? <a href="">Signup now</a>
+                </div>
+            </form>
+
+
+
+
+            <form action="/signup" method="post" th:object="${user}" class="signup">
+
+                <div class="field">
+                    <input   name="name" type="text" placeholder="Name" required>
+                </div>
+               <div class="field">
+                    <input   name="email" type="email" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <label>
+                        <select name="role" placeholder="Role" required>
+                            <option>STUDENT</option>
+                            <option>TEACHER</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="field">
+                    <input  id="password" name="password" type="password" placeholder="Password" required>
+                </div>
+                <div class="field">
+                    <input  id="confirm_password" type="password" placeholder="Confirm password" required>
+                    <br>
+                    <br>
+                    <p th:text="${SignupCheck}" style="color:red;"></p>
+                    <p id="passwordError" style="color: red; font-size: 14px; display: none;">Passwords do not match</p>
+                    <br>
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Signup">
+                </div>
+            </form>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+      loginForm.style.marginLeft = "-50%";
+      loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+      loginForm.style.marginLeft = "0%";
+      loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+      signupBtn.click();
+      return false;
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const signupForm = document.querySelector("form.signup");
+        const password = signupForm.querySelector("#password");
+        const confirmPassword = signupForm.querySelector("#confirm_password");
+        const errorText = document.getElementById("passwordError");
+
+        function validatePassword() {
+            if (confirmPassword.value !== password.value) {
+                errorText.style.display = "block";
+                confirmPassword.setCustomValidity("Passwords do not match");
+                confirmPassword.style.border = "2px solid red"; // Add red border for visual feedback
+                return false; // Return false to indicate mismatch
+            } else {
+                errorText.style.display = "none";
+                confirmPassword.setCustomValidity("");
+                confirmPassword.style.border = "2px solid green"; // Green border if matched
+                return true; // Return true to indicate match
+            }
+        }
+
+        password.addEventListener("input", validatePassword);
+        confirmPassword.addEventListener("input", validatePassword);
+
+        // Prevent form submission if passwords don't match
+        signupForm.addEventListener("submit", function (event) {
+            if (!validatePassword()) {
+                event.preventDefault(); // Stop form submission
+            }
+        });
+    });
+
+    
+</script>
+</body>
+</html>

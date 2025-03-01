@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>page</title>
+    <link rel="stylesheet" href="course.css" />
+
+    <!-- script -->
+
+    <script src="course.js"></script>
+
+    <!-- Unicons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <!-- boxicon -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    :root {
+      --primary-color: #4a98f7;
+      --secondary-color: #f9f9f9;
+      --text-color: #333;
+      --bg-color: #f0faff;
+    }
+  </style>
+  <body>
+    <nav class="nav">
+      <i class="uil uil-bars navOpenBtn"></i>
+      <a href="#" class="logo">AtomTechDM</a>
+
+      <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+
+      <i class="uil uil-search search-icon" id="searchIcon"></i>
+      <div class="search-box">
+        <i class="uil uil-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search here..." />
+      </div>
+    </nav>
+
+    <div class="search-results" id="searchResults"></div>
+
+
+
+
+
+
+
+    <section class="course-section">
+
+        <div class="course-container">
+            <div class="course-search">
+                <input type="text" placeholder="Find your course">
+                <select>
+                    <option>Most Viewed</option>
+                    <option>Highest Rated</option>
+                    <option>Newest</option>
+                </select>
+            </div>
+            <div class="course-grid">
+                <script>
+                    const courses = [
+                        { title: "Sketch from A to Z: for app designer", level: "All Level", rating: "4.5/5.0", duration: "12h 56m • 15 lectures" },
+                        { title: "Graphic Design Masterclass", level: "Beginner", rating: "5.0/5.0", duration: "9h 56m • 65 lectures" },
+                        { title: "Create a Design System in Figma", level: "Beginner", rating: "4.5/5.0", duration: "5h 56m • 32 lectures" },
+                        { title: "Deep Learning with React-Native", level: "Beginner", rating: "4.5/5.0", duration: "18h 56m • 99 lectures" },
+                        { title: "Build Responsive Websites with HTML", level: "All Level", rating: "4.5/5.0", duration: "15h 30m • 68 lectures" },
+                        { title: "Build Websites with CSS", level: "Beginner", rating: "4.5/5.0", duration: "36h 30m • 72 lectures" }
+                    ];
+    
+                    document.write(
+                        courses.map(course => `
+                            <div class="course-card">
+                                <img src="image.png" alt="Course Image">
+                                <div class="course-info">
+                                    <span class="level">${course.level}</span>
+                                    <br>
+                                    <a href="">${course.title}</a>
+                                    <p>Far advanced setting say finished rallery.</p>
+                                    <div class="rating">
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bx-star'></i>
+                                        <span>${course.rating}</span>
+                                    </div>
+                                    <p class="time">${course.duration}</p>
+                                </div>
+                            </div>`).join('')
+                    );
+                </script>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+    <!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
+    <footer>
+      <div class="contentFooter">
+        <div class="top">
+          <div class="logo-details">
+            <i class="fab fa-slack"></i>
+            <span class="logo_name">AtomTechDM</span>
+          </div>
+          <div class="media-icons">
+            <a href="#"><i class="bx bxl-facebook"></i></a>
+            <a href="#"><i class="bx bxl-twitter"></i></a>
+            <a href="#"><i class="bx bxl-instagram"></i></a>
+            <a href="#"><i class="bx bxl-linkedin"></i></a>
+            <a href="#"><i class="bx bxl-youtube"></i></a>
+          </div>
+        </div>
+        <div class="link-boxes">
+          <ul class="box">
+            <li class="link_name">Company</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Get started</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Services</li>
+            <li><a href="#">App design</a></li>
+            <li><a href="#">Web design</a></li>
+            <li><a href="#">Logo design</a></li>
+            <li><a href="#">Banner design</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Account</li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">My account</a></li>
+            <li><a href="#">Prefrences</a></li>
+            <li><a href="#">Purchase</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Courses</li>
+            <li><a href="#">HTML & CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">Photography</a></li>
+            <li><a href="#">Photoshop</a></li>
+          </ul>
+          <ul class="box input-box">
+            <li class="link_name">Subscribe</li>
+            <li><input type="text" placeholder="Enter your email" /></li>
+            <li><input type="button" value="Subscribe" /></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-details">
+        <div class="bottom_text">
+          <span class="copyright_text"
+            >Copyright © 2025 <a href="#">AtomTechDM</a>All rights
+            reserved</span
+          >
+          <span class="policy_terms">
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms & condition</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
+
+    <script>
+        
+    </script>
+  </body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elearning</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Unicons CSS -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+   <script src="index.js" defer></script>
+
+
+   <!-- boxicon -->
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+  </head>
+  <body>
+    <nav class="nav">
+      <i class="uil uil-bars navOpenBtn"></i>
+      <a href="#" class="logo">AtomTechDM</a>
+
+      <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+
+      <i class="uil uil-search search-icon" id="searchIcon"></i>
+      <div class="search-box">
+        <i class="uil uil-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search here..." />
+      </div>
+    </nav>
+
+
+    <div class="search-results" id="searchResults">
+
+    </div>
+
+
+
+    <!-- achievement -->
+    <div class="achievement">
+        <div class="box">
+            <i class='bx bx-book-open icon'></i>
+            <div id="lab">
+            <div class="count">10K+</div>
+            <div class="label">Online Courses</div>
+            </div>
+        </div>
+        <div class="box">
+            <i class='bx bx-user-circle icon'></i>
+            <div id="lab">
+            <div class="count">200+</div>
+            <div class="label">Expert Tutors</div>
+            </div>
+        </div>
+        <div class="box">
+            <i class='bx bxs-graduation icon'></i>
+            <div id="lab">
+            <div class="count">60K+</div>
+            <div class="label">Online Students</div>
+            </div>
+        </div>
+        <div class="box">
+            <i class='bx bx-award icon'></i>
+            <div id="lab">
+            <div class="count">6K+</div>
+            <div class="label">Certified Courses</div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------------ -->
+
+
+
+
+    <!-- courses -- -->
+
+    <div class="courses-container">
+        <h1>Most Popular Courses</h1>
+        <p>Choose from hundreds of courses from specialist organizations</p>
+        <div class="filter-buttons">
+            <button class="filter active" data-category="all">All</button>
+            <button class="filter" data-category="web">Web Design</button>
+            <button class="filter" data-category="dev">Development</button>
+            <button class="filter" data-category="graphic">Graphic Design</button>
+            <button class="filter" data-category="marketing">Marketing</button>
+            <button class="filter" data-category="finance">Finance</button>
+        </div>
+        <div class="courses">
+            </div>
+    </div>
+
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+
+
+
+   <!-- instructor   -->
+
+
+    <div class="instructor-section">
+      <div class="content">
+          <h2>Become an Instructor!</h2>
+          <p>Speedily say has suitable disposal add boy. On forth doubt miles of child. Exercise joy man children rejoiced.</p>
+      </div>
+      <button class="btn">Start Teaching Today</button>
+      <div class="floating-circle" style="top: 20px; left: 80px;"></div>
+      <div class="floating-circle" style="top: 50px; right: 120px;"></div>
+  </div>
+
+
+
+  <!-- -------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+<!--  course tranding -->
+  
+
+
+
+<div class="containerCourse">
+  <center>
+    <h1 id="trending">Course Trending</h1>
+    <br>
+  </center>
+  <div class="slider-wrapper">
+    <button id="prev-slide" class="slide-button material-symbols-rounded">
+      <i class="bx bx-chevron-left"></i>
+    </button>
+    <ul class="image-list">
+      
+
+
+     <!-- ---------------------- course   ------------------------------- -->
+      <div class="course-card">
+        <img class="course-image" src="image.png" alt="Course Image">
+        <div class="course-details">
+          <div class="tags">
+            <span class="tag development">Development</span>
+            <span class="tag level">All level</span>
+          </div>
+          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
+          <div class="rating">
+            <span>⭐ 4.5</span>
+            <span>(4200)</span>
+            <span>5000 <small>(Student)</small></span>
+          </div>
+          <div class="course-info">
+            <span>⏳ 14h 30m</span>
+            <span>📚 75 lectures</span>
+          </div>
+          <div class="instructor">
+            <img class="instructor-img" src="course.png" alt="Instructor">
+            <span>John Doe</span>
+          </div>
+          <div class="price">$299</div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------- -->
+
+     <!-- ---------------------- course   ------------------------------- -->
+      <div class="course-card">
+        <img class="course-image" src="image.png" alt="Course Image">
+        <div class="course-details">
+          <div class="tags">
+            <span class="tag development">Development</span>
+            <span class="tag level">All level</span>
+          </div>
+          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
+          <div class="rating">
+            <span>⭐ 4.5</span>
+            <span>(4200)</span>
+            <span>5000 <small>(Student)</small></span>
+          </div>
+          <div class="course-info">
+            <span>⏳ 14h 30m</span>
+            <span>📚 75 lectures</span>
+          </div>
+          <div class="instructor">
+            <img class="instructor-img" src="course.png" alt="Instructor">
+            <span>John Doe</span>
+          </div>
+          <div class="price">$299</div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------- -->
+
+     <!-- ---------------------- course   ------------------------------- -->
+      <div class="course-card">
+        <img class="course-image" src="image.png" alt="Course Image">
+        <div class="course-details">
+          <div class="tags">
+            <span class="tag development">Development</span>
+            <span class="tag level">All level</span>
+          </div>
+          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
+          <div class="rating">
+            <span>⭐ 4.5</span>
+            <span>(4200)</span>
+            <span>5000 <small>(Student)</small></span>
+          </div>
+          <div class="course-info">
+            <span>⏳ 14h 30m</span>
+            <span>📚 75 lectures</span>
+          </div>
+          <div class="instructor">
+            <img class="instructor-img" src="course.png" alt="Instructor">
+            <span>John Doe</span>
+          </div>
+          <div class="price">$299</div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------- -->
+
+     <!-- ---------------------- course   ------------------------------- -->
+      <div class="course-card">
+        <img class="course-image" src="image.png" alt="Course Image">
+        <div class="course-details">
+          <div class="tags">
+            <span class="tag development">Development</span>
+            <span class="tag level">All level</span>
+          </div>
+          <a href="" class="course-title">React – The Complete Guide (2024 Edition)</a>
+          <div class="rating">
+            <span>⭐ 4.5</span>
+            <span>(4200)</span>
+            <span>5000 <small>(Student)</small></span>
+          </div>
+          <div class="course-info">
+            <span>⏳ 14h 30m</span>
+            <span>📚 75 lectures</span>
+          </div>
+          <div class="instructor">
+            <img class="instructor-img" src="course.png" alt="Instructor">
+            <span>John Doe</span>
+          </div>
+          <div class="price">$299</div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------- -->
+
+
+    </ul>
+    <button id="next-slide" class="slide-button material-symbols-rounded">
+      <i class="bx bx-chevron-right"></i>
+    </button>
+  </div>
+  <div class="slider-scrollbar">
+    <div class="scrollbar-track">
+      <div class="scrollbar-thumb"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------- presentation --------------------------------------------------------- -->
+<section id="prensentation">
+  <video class="fullscreen-video" autoplay loop muted playsinline>
+    <source src="presentation.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+</section>
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+  <!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
+  <footer>
+    <div class="contentFooter">
+      <div class="top">
+        <div class="logo-details">
+          <i class="fab fa-slack"></i>
+          <span class="logo_name">AtomTechDM</span>
+        </div>
+        <div class="media-icons">
+          <a href="#"><i class="bx bxl-facebook"></i></a>
+          <a href="#"><i class="bx bxl-twitter"></i></a>
+          <a href="#"><i class="bx bxl-instagram"></i></a>
+          <a href="#"><i class="bx bxl-linkedin"></i></a>
+          <a href="#"><i class="bx bxl-youtube"></i></a>
+        </div>
+      </div>
+      <div class="link-boxes">
+        <ul class="box">
+          <li class="link_name">Company</li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Get started</a></li>
+        </ul>
+        <ul class="box">
+          <li class="link_name">Services</li>
+          <li><a href="#">App design</a></li>
+          <li><a href="#">Web design</a></li>
+          <li><a href="#">Logo design</a></li>
+          <li><a href="#">Banner design</a></li>
+        </ul>
+        <ul class="box">
+          <li class="link_name">Account</li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">My account</a></li>
+          <li><a href="#">Prefrences</a></li>
+          <li><a href="#">Purchase</a></li>
+        </ul>
+        <ul class="box">
+          <li class="link_name">Courses</li>
+          <li><a href="#">HTML & CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">Photography</a></li>
+          <li><a href="#">Photoshop</a></li>
+        </ul>
+        <ul class="box input-box">
+          <li class="link_name">Subscribe</li>
+          <li><input type="text" placeholder="Enter your email"></li>
+          <li><input type="button" value="Subscribe"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-details">
+      <div class="bottom_text">
+        <span class="copyright_text">Copyright © 2025 <a href="#">AtomTechDM</a>All rights reserved</span>
+        <span class="policy_terms">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms & condition</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
+
+
+
+
+
+
+  </body>
+</html>
