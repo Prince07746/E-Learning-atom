@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (results.length > 0) {
                   results.forEach(result => {
                       const resultCard = document.createElement("a");
-                      resultCard.href = result.link;
+                      resultCard.href = "/course/"+result.id;
                       resultCard.classList.add("search-card");
                       var imageSrc = `/images/${result.image}`;
                       console.dir(imageSrc);
@@ -209,13 +209,18 @@ document.addEventListener('DOMContentLoaded', () => {
         filter(course => course.category === category);
 
         filteredCourses.forEach(course => {
-            const courseDiv = document.createElement('div');
+            const courseDiv = document.createElement('a');
+            courseDiv.style.cursor = 'pointer';
+            courseDiv.style.textDecoration = 'none';
+            courseDiv.style.color = 'black';
+            courseDiv.href = `/course/${course.id}`;
             courseDiv.classList.add('course');
             courseDiv.innerHTML = `
                 <img src="/images/${course.image}" alt="${course.title}">
                 <div class="course-level">${course.level}</div>
+                <br>
                 <h3 class="course-title">${course.title}</h3>
-                <p class="course-description">${course.description}</p>
+                <p class="course-description" style="text-align: left">${course.description}</p>
                 <div class="course-rating">
                     ${'<i class="bx bxs-star"></i>'.repeat(course.rating)}
                 </div>

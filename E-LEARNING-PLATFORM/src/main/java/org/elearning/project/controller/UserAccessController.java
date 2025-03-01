@@ -45,7 +45,6 @@ public class UserAccessController {
         Pageable pageableByRating = PageRequest.of(0,10);
 
         List<Course> courseListLatest = courseService.getCoursesListByPage(pageable);
-
         List<Course> courseListRating = courseService.getCoursesListByPageRating(pageableByRating);
 
 
@@ -144,6 +143,24 @@ public class UserAccessController {
         }
 
         return link;
+    }
+
+    @GetMapping("/course/{id}")
+    public String getCourse(@PathVariable(name = "id") int id, Model model){
+        model.addAttribute("course", courseService.getCourse(id));
+        if (userLogin != null) {
+            model.addAttribute("authentication", "Logout");
+            model.addAttribute("authenticationLink", "logout");
+            model.addAttribute("dashboard", "Dashboard");
+            model.addAttribute("dashboardLink", "/dashboard/" + userLogin.getId());
+        } else {
+            model.addAttribute("authentication", "Login");
+            model.addAttribute("authenticationLink", "login");
+            model.addAttribute("dashboard", "");
+            model.addAttribute("dashboardLink", "");
+        }
+
+        return "courseDetails";
     }
 
 
