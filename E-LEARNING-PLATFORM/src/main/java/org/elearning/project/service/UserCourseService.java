@@ -86,6 +86,15 @@ public class UserCourseService {
         courseRepository.save(course);
     }
 
+    public void addMoreCourse(List<Course> courses) {
+        courseRepository.saveAll(courses);
+    }
+
+    public List<Course> searchCourses(String query) {
+        return courseRepository.searchCourses(query);
+    }
+
+
 
 
     // Update a course (admin/teacher only, non-subscriber)

@@ -3,9 +3,7 @@ package org.elearning.project.controller;
 
 import org.elearning.project.DTO.LessonUpdateRequest;
 import org.elearning.project.model.*;
-import org.elearning.project.service.CourseService;
 import org.elearning.project.service.UserCourseService;
-import org.elearning.project.service.UserLearningService;
 import org.elearning.project.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,22 +19,14 @@ public class UserAccessController {
 
     private final UserManagementService userManagementService;
 
-    private final UserLearningService userLearningService;
-    private final CourseService courseService;
 
     private final UserCourseService userCourseService;
 
     private User userLogin = null;
 
     @Autowired
-    public UserAccessController(UserManagementService userManagementService,
-                                UserLearningService userLearningService,
-                                CourseService courseService,UserCourseService userCourseService
-    ) {
-
+    public UserAccessController(UserManagementService userManagementService,UserCourseService userCourseService) {
         this.userManagementService = userManagementService;
-        this.userLearningService = userLearningService;
-        this.courseService = courseService;
         this.userCourseService = userCourseService;
     }
 
