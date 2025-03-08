@@ -36,6 +36,16 @@ public class UserLearningService {
      return user1.getSubscriptionList().
                 stream().map(Subscription::getCourse).toList();
     }
+
+    @Transactional
+    public List<Course> getCoursesSubscribed(User user) {
+     User user1 = subscriptionRepository.findByIdWithSubscriptions(user.getId()).orElse(null);
+     if(user1 == null) return Collections.emptyList();
+     return user1.getSubscriptionList().
+                stream().map(Subscription::getCourse).toList();
+    }
+
+
     @Transactional
     public List<Certificate> getCertificateList(User user) {
      User user1 = subscriptionRepository.findByIdWithSubscriptions(user.getId()).orElse(null);

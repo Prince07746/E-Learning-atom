@@ -24,6 +24,12 @@ public class Lesson {
     @JoinColumn(name="course_id")
     private Course course;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="pricing")
+    private  PRICE pricing;
+
+    @Column(name="completed")
+    private boolean completed;
 
     public int getId() {
         return id;
@@ -63,5 +69,35 @@ public class Lesson {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public PRICE getPricing() {
+        return pricing;
+    }
+
+    public void setPricing(PRICE pricing) {
+        this.pricing = pricing;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", contentType=" + contentType +
+                ", content='" + content + '\'' +
+                ", course=" + course +
+                ", pricing=" + pricing +
+                ", completed=" + completed +
+                '}';
     }
 }

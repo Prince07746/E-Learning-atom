@@ -1,518 +1,546 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Course Details</title>
-    <link rel="stylesheet" href="/css/page.css" />
-    <link rel="stylesheet" href="/css/coursedetail.css" />
+    <link rel="stylesheet" href="/css/page.css"/>
+    <link rel="stylesheet" href="/css/coursedetail.css"/>
     <!-- Unicons CSS -->
     <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
 
     <!-- boxicon -->
     <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
     />
 
     <!-- script -->
 
 
-  </head>
+</head>
 
-  
 
-  <body>
-    <nav class="nav">
-      <i class="uil uil-bars navOpenBtn"></i>
-      <a href="#" class="logo">AtomTechDM</a>
+<body>
+<nav class="nav">
+    <i class="uil uil-bars navOpenBtn"></i>
+    <a href="#" class="logo">AtomTechDM</a>
 
-      <ul class="nav-links">
+    <ul class="nav-links">
         <i class="uil uil-times navCloseBtn"></i>
         <li><a href="/">Home</a></li>
         <li><a href="/service">Services</a></li>
         <li><a href="/courses">Courses</a></li>
-          <li><a th:href="${dashboardLink}" th:text="${dashboard}"></a></li>
-          <li><a th:href="${authenticationLink}" th:text="${authentication}"></a></li>
-      </ul>
+        <li><a th:href="${dashboardLink}" th:text="${dashboard}"></a></li>
+        <li><a th:href="${authenticationLink}" th:text="${authentication}"></a></li>
+    </ul>
 
-      <i class="uil uil-search search-icon" id="searchIcon"></i>
-      <div class="search-box">
+    <i class="uil uil-search search-icon" id="searchIcon"></i>
+    <div class="search-box">
         <i class="uil uil-search search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Search here..." />
-      </div>
-    </nav>
+        <input type="text" id="searchInput" placeholder="Search here..."/>
+    </div>
+</nav>
 
-    <div class="search-results" id="searchResults"></div>
+<div class="search-results" id="searchResults"></div>
 
-    <!-- course detail -->
-    <section class="course-detail"  >
-      <!-- top section -->
-      <section class="course-section py-5">
+<!-- course detail -->
+<section class="course-detail">
+    <!-- top section -->
+    <section class="course-section py-5">
         <div class="container">
-          <div class="course-card">
-            <div class="card-body">
-              <div class="course-tag">
-                <span class="badge badge-primary" th:text="${course.category}">...</span>
-              </div>
-              <h2 class="course-title" th:text="${course.title}">
-                The Complete Digital Marketing<br />
-              </h2>
-              <p class="course-description" th:text="${course.description}">
-                ...
-              </p>
-              <div class="course-meta">
+            <div class="course-card">
+                <div class="card-body">
+                    <div class="course-tag">
+                        <span class="badge badge-primary" th:text="${course.category}">...</span>
+                    </div>
+                    <h2 class="course-title" th:text="${course.title}">
+                        The Complete Digital Marketing<br/>
+                    </h2>
+                    <p class="course-description" th:text="${course.description}">
+                        ...
+                    </p>
+                    <div class="course-meta">
                 <span class="rating">
                   <i class="bx bxs-star"></i> <span th:text="${course.rating}"></span>
                 </span>
-                <span class="enrollment">
+                        <span class="enrollment">
                   <i class="bx bxs-user"></i> +2k Enrolled
                 </span>
-                <span class="level">
+                        <span class="level">
                   <i class="bx bx-signal-4"></i> <span th:text="${course.title}"></span>
                 </span>
-                <span class="updated">
+                        <span class="updated">
                   <i class="bx bx-time"></i> Last Updated <span th:text="${course.date}"></span>
                 </span>
-                <span class="language">
+                        <span class="language">
                   <i class="bx bx-world"></i> English
                 </span>
-              </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- course details -->
+    <!-- course details -->
 
-      <section id="about-course">
-        
+    <section id="about-course">
+
 
         <div id="section-header">
-        <button onclick="showSection('overview', this)">Overview</button>
-        <button onclick="showSection('curriculum', this)">Curriculum</button>
-        <button onclick="showSection('reviews', this)">Reviews</button>
-        <button onclick="showSection('instructor', this)">Instructor</button>
-        <button onclick="showSection('comment', this)">Comment</button>
+            <button onclick="showSection('overview', this)">Overview</button>
+            <button onclick="showSection('curriculum', this)">Curriculum</button>
+            <button onclick="showSection('reviews', this)">Reviews</button>
+            <button onclick="showSection('instructor', this)">Instructor</button>
+            <button onclick="showSection('comment', this)">Comment</button>
         </div>
 
 
         <div id="viewer-section">
-         
 
 
-         <!-- flex 1 -->
-          <div id="course-deatils-view-1">  
+            <!-- flex 1 -->
+            <div id="course-deatils-view-1">
 
 
+                <!-- overview -->
 
-          <!-- overview -->
+                <div id="overview">
+                    <h2>Overview</h2>
+                    <div class="course-container">
+                        <h2 class="course-title" th:text="${course.title}">...</h2>
+                        <p class="course-description" th:text="${course.description}">
+                            ...
+                        </p>
 
-          <div id="overview">
-            <h2>Overview</h2>
-            <div class="course-container">
-              <h2 class="course-title" th:text="${course.title}">...</h2>
-              <p class="course-description" th:text="${course.description}">
-                  ...
-              </p>
-          
-              <h4 class="mt-3">What You'll Learn:</h4>
-              <ul class="learn-list">
-                  <li><i class='bx bx-check-circle'></i> Digital marketing course introduction</li>
-                  <li><i class='bx bx-check-circle'></i> Customer Life Cycle</li>
-                  <li><i class='bx bx-check-circle'></i> What is Search Engine Optimization (SEO)</li>
-                  <li><i class='bx bx-check-circle'></i> Facebook Ads</li>
-                  <li><i class='bx bx-check-circle'></i> Facebook Messenger Chatbot</li>
-                  <li><i class='bx bx-check-circle'></i> Search engine optimization tools</li>
-                  <li><i class='bx bx-check-circle'></i> Why SEO</li>
-                  <li><i class='bx bx-check-circle'></i> URL Structure</li>
-                  <li><i class='bx bx-check-circle'></i> Featured Snippet</li>
-                  <li><i class='bx bx-check-circle'></i> SEO tips and tricks</li>
-                  <li><i class='bx bx-check-circle'></i> Google Tag Manager</li>
-              </ul>
-          </div>
-          </div>
+                        <h4 class="mt-3">What You'll Learn:</h4>
+                        <ul class="learn-list">
+                            <li><i class='bx bx-check-circle'></i> Digital marketing course introduction</li>
+                            <li><i class='bx bx-check-circle'></i> Customer Life Cycle</li>
+                            <li><i class='bx bx-check-circle'></i> What is Search Engine Optimization (SEO)</li>
+                            <li><i class='bx bx-check-circle'></i> Facebook Ads</li>
+                            <li><i class='bx bx-check-circle'></i> Facebook Messenger Chatbot</li>
+                            <li><i class='bx bx-check-circle'></i> Search engine optimization tools</li>
+                            <li><i class='bx bx-check-circle'></i> Why SEO</li>
+                            <li><i class='bx bx-check-circle'></i> URL Structure</li>
+                            <li><i class='bx bx-check-circle'></i> Featured Snippet</li>
+                            <li><i class='bx bx-check-circle'></i> SEO tips and tricks</li>
+                            <li><i class='bx bx-check-circle'></i> Google Tag Manager</li>
+                        </ul>
+                    </div>
+                </div>
 
-          <!-- ---------------------------------------------------- -->
-
+                <!-- ---------------------------------------------------- -->
 
 
+                <!-- curriculum -->
+                <div id="curriculum">
+
+                    <center>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="myProgressBar"></div>
+                        </div>
+                        <div class="progress-label" id="progressLabel">0%</div>
+                    </center>
+
+                    <div id="videos-to-play">
+                        <video id="main-video" src="/videos/presentation.mp4" controls autoplay="false"></video>
+                        <h2 id="video-title">introduction to object-oriented programming</h2>
+                        <p id="videos-lesson-description">Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+
+                    <section id="lessons">
 
 
+                        <div class="dropdown">
+                            <button class="dropdown-btn"><i class='bx bx-play-circle'></i> <span>Introduction of Digital Marketing</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4"
+                                   data-title="Introduction"
+                                   data-desc="Introduction to the basics of Digital Marketing.">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title">Introduction</span>
+                                        <span class="video-duration">2m 10s</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
 
-          <!-- curriculum -->
-          <div id="curriculum">
-          
-        <center>
-          <div class="progress-container">
-            <div class="progress-bar" id="myProgressBar"></div>
-          </div>
-          <div class="progress-label" id="progressLabel">0%</div>
-        </center>
-          
-          <div id="videos-to-play">
-            <video id="main-video" src="/videos/presentation.mp4" controls autoplay="false"></video>
-            <h2 id="video-title">introduction to object oriented programming</h2>
-            <p id="videos-lesson-description">Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-
-            <section id="lessons">
-
-            <div class="dropdown">
-              <button class="dropdown-btn"><i class='bx bx-play-circle'></i>  <span>Introduction of Digital Marketing</span></button>
-              <div class="dropdown-content">
-                 <a  class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Introduction</span>
-                    <span class="video-duration">2m 10s</span>
-                  </div>
-                </a>
-                 <a href="#" class="video-link" data-lesson-id="1"  data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">What is Digital Marketing</span>
-                    <span class="video-duration">15m 10s</span>
-                  </div>
-                </a>
-                 <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Types of Digital Marketing</span>
-                    <span class="video-duration">18m 10s</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          
-            <div class="dropdown">
-              <button class="dropdown-btn">
-                <i class='bx bx-play-circle'></i>
-                <span>Customer Life Cycle</span>
-              </button>
-              <div class="dropdown-content">
-                 <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Customer Acquisition</span>
-                    <span class="video-duration">10m 50s</span>
-                  </div>
-                </a>
-                 <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Customer Retention</span>
-                    <span class="video-duration">7m 30s</span>
-                  </div>
-                </a>
-                 <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Customer Loyalty</span>
-                    <span class="video-duration">12m 20s</span>
-                  </div>
-                </a>
-                 <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4" data-title="Introduction" data-desc="Introduction to the basics of Digital Marketing.">
-                  <div class="video-info">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="video-title">Customer Advocacy</span>
-                    <span class="video-duration">5m 40s</span>
-                  </div>
-                </a>
-              </div>
-            </div>
+                        <div th:each="lesson : ${lessons}" class="dropdown">
+                            <button class="dropdown-btn">
+                                <i class='bx bx-play-circle'></i>
+                                <span th:text="${lesson.title}">Lesson Title</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a class="video-link"
+                                   th:data-lesson-id="${lesson.id}"
+                                   th:data-src="${lesson.videoUrl}"
+                                   th:data-title="${lesson.title}"
+                                   th:data-desc="${lesson.description}">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title" th:text="${lesson.title}">Lesson Title</span>
+                                        <span class="video-duration" th:text="${lesson.duration}">Duration</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
 
 
+                        <div class="dropdown">
+                            <button class="dropdown-btn">
+                                <i class='bx bx-play-circle'></i>
+                                <span>Customer Life Cycle</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4"
+                                   data-title="Introduction"
+                                   data-desc="Introduction to the basics of Digital Marketing.">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title">Customer Acquisition</span>
+                                        <span class="video-duration">10m 50s</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4"
+                                   data-title="Introduction"
+                                   data-desc="Introduction to the basics of Digital Marketing.">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title">Customer Retention</span>
+                                        <span class="video-duration">7m 30s</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4"
+                                   data-title="Introduction"
+                                   data-desc="Introduction to the basics of Digital Marketing.">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title">Customer Loyalty</span>
+                                        <span class="video-duration">12m 20s</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="video-link" data-lesson-id="1" data-src="/videos/presentation.mp4"
+                                   data-title="Introduction"
+                                   data-desc="Introduction to the basics of Digital Marketing.">
+                                    <div class="video-info">
+                                        <i class='bx bx-play-circle'></i>
+                                        <span class="video-title">Customer Advocacy</span>
+                                        <span class="video-duration">5m 40s</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
 
 
-
-          </section>
-          </div>
-          <!-- ---------------------------------------------------- -->
-
-        
+                    </section>
+                </div>
+                <!-- ---------------------------------------------------- -->
 
 
+                <!-- reviews -->
 
+                <div id="reviews">
+                    <h2>Reviews</h2>
 
-          <!-- reviews -->  
+                    <div class="reviews-section">
+                        <h2>Student Reviews</h2>
 
-          <div id="reviews">
-            <h2>Reviews</h2>
-            
-            <div class="reviews-section">
-              <h2>Student Reviews</h2>
-
-              <div class="average-rating">
-                <span class="average">4.5</span>
-                <span class="stars">
-                    <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star-half"></i>
+                        <div class="average-rating">
+                            <span class="average">4.5</span>
+                            <span class="stars">
+                    <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                    class="bx bxs-star"></i><i class="bx bxs-star-half"></i>
                 </span>
-                <span class="based-on">Based on today's reviews</span>
-            </div>
-            
-            <div class="review">
-                <div class="review-author">
-                    <img src="image.png" alt="Avatar">  
-                    <span>Jacqueline Miller</span>
-                    <span class="review-date">2 days ago</span>
-                </div>
-                <div class="review-rating">
-                    <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star-half"></i>
-                </div>
-                <p class="review-text">Perceived end knowledge certainly day sweetness why cordially. Ask a quick six even offer see among. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance. <a href="#" class="read-more">Read More</a></p>
-            </div>
-            
-            <div class="review">
-                <div class="review-author">
-                    <img src="image.png" alt="Avatar">
-                    <span>Louis Ferguson</span>
-                    <span class="review-date">1 day ago</span>
-                </div>
-                <div class="review-rating">
-                    <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i>
-                </div>
-                <p class="review-text">Water timed folly right aware if oh truth. Imprudence attachment him for sympathize. Large above be to means. Dashwood does provide stronger is. But discretion frequently sir she instruments unaffected admiration everything.</p>
-            </div>
-            
-            <div class="review">
-                <div class="review-author">
-                     <img src="image.png" alt="Avatar">
-                    <span>Dennis Barrett</span>
-                    <span class="review-date">2 days ago</span>
-                </div>
-                <div class="review-rating">
-                    <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i>
-                </div>
-                <p class="review-text">Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitors we private removed. Moderate do subjects to distance.</p>
-            
-            <h3>Leave a Review</h3>
-            <form class="review-form">
-                <input type="text" placeholder="Name" required>
-                <input type="email" placeholder="Email" required>
-                <div class="star-rating">
-                    <i class="bx bxs-star" data-rating="1"></i>
-                    <i class="bx bxs-star" data-rating="2"></i>
-                    <i class="bx bxs-star" data-rating="3"></i>
-                    <i class="bx bxs-star" data-rating="4"></i>
-                    <i class="bx bxs-star" data-rating="5"></i>
-                </div>
-                <textarea placeholder="Your Review" required></textarea>
-                <button type="submit">Post Review</button>
-            </form>
-
-           </div>
-          </div>
-        </div>
-
-          <!-- ---------------------------------------------------- -->
-
-
-
-
-
-
-          <!-- instructor -->
-
-          <div id="instructor">
-            <h2>Instructor</h2>
-            <div class="instructor-profile">
-              <div class="instructor-image">
-                  <img src="image.png" alt="Instructor's Picture">
-              </div>
-              <div class="instructor-details">
-                  <div class="instructor-header">
-                      <span class="instructor-name">Louis Ferguson</span>
-                      <span class="instructor-title">Instructor of Marketing</span>
-                  </div>
-                  <div class="instructor-stats">
-                      <div><i class='bx bx-user'></i> 9.1k<br>Followers</div>
-                      <div><i class='bx bx-star'></i> 4.5<br>Rating</div>
-                      <div><i class='bx bx-book'></i> 29<br>Courses</div>
-                      <div><i class='bx bx-group'></i> 205<br>Students</div>
-                  </div>
-                  <div class="instructor-about">
-                      <p>Fulfilled direction use continual set him propriety continued. Sew met applauded favorite deficient engrossed concealed and her. Concluded boy perpetual old supposing. Farther related bed and passage comfort civilly. Dashboard see frankness objection abilities. As hastened oh produced prospect formerly up am. Placing forming nay looking old married few haa. Margaret disposed of add screened rendered six say his striking confined.</p>
-          
-                      <p>As it so contrasted oh estimating instrument. Size like body someone had. Are conduct viewing boy minutes warrant the expense? Tolerably behavior may admit daughters offending her ask own. Praise effect wishes change way and any wanted.</p>
-                  </div>
-                  <div class="instructor-contact">
-                      <a href="mailto:hello@email.com"><i class='bx bx-envelope'></i> hello@email.com</a>
-                      <a href="tel:123-456-7890"><i class='bx bx-phone'></i> 123-456-7890</a>
-                  </div>
-              </div>
-          </div>
-          
-          </div>
-          <!-- ---------------------------------------------------- -->
-
-
-
-
-
-
-          <!-- comment  -->
-
-          <div id="comment">
-            <h2>Comment</h2>
-            
-            </div>
-             <!-- ---------------------------------------------------- -->
-
-
-
-
-
-
-           </div>
-        
-        <!-- -------------------------- -->
-
-
-        <!-- flex 2 -->
-        <div id="course-deatils-view-2">
-            <div class="containerView2">
-                <div class="course-sidebar">
-            
-                    <!-- Course Video & Pricing -->
-                    <div class="card">
-                        <div class="course-video">
-                            <video src="/videos/presentation.mp4" controls></video>
+                            <span class="based-on">Based on today's reviews</span>
                         </div>
-                        <div class="course-price">
 
-                            <h3>$150 / <span class="text-muted text-decoration-line-through">$350</span>
-                            <span class="discount">60% OFF</span></h3>
+                        <div class="review">
+                            <div class="review-author">
+                                <img src="image.png" alt="Avatar">
+                                <span>Jacqueline Miller</span>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                            <div class="review-rating">
+                                <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                    class="bx bxs-star"></i><i class="bx bxs-star-half"></i>
+                            </div>
+                            <p class="review-text">Perceived end knowledge certainly day sweetness why cordially. Ask a
+                                quick six even offer see among. Handsome met debating sir dwelling age material. As
+                                style lived he worse dried. Offered related so visitors we private removed. Moderate do
+                                subjects to distance. <a href="#" class="read-more">Read More</a></p>
+                        </div>
 
-                            <a href="" class="btn btn-outline-primary btn-custom">Free trial</a>
-                            <a href="" class="btn btn-success btn-custom mt-2">Buy course</a>
+                        <div class="review">
+                            <div class="review-author">
+                                <img src="image.png" alt="Avatar">
+                                <span>Louis Ferguson</span>
+                                <span class="review-date">1 day ago</span>
+                            </div>
+                            <div class="review-rating">
+                                <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                    class="bx bxs-star"></i><i class="bx bxs-star"></i>
+                            </div>
+                            <p class="review-text">Water timed folly right aware if oh truth. Imprudence attachment him
+                                for sympathize. Large above be to means. Dashwood does provide stronger is. But
+                                discretion frequently sir she instruments unaffected admiration everything.</p>
+                        </div>
+
+                        <div class="review">
+                            <div class="review-author">
+                                <img src="image.png" alt="Avatar">
+                                <span>Dennis Barrett</span>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                            <div class="review-rating">
+                                <i class="bx bxs-star"></i><i class="bx bxs-star"></i><i class="bx bxs-star"></i><i
+                                    class="bx bxs-star"></i>
+                            </div>
+                            <p class="review-text">Handsome met debating sir dwelling age material. As style lived he
+                                worse dried. Offered related so visitors we private removed. Moderate do subjects to
+                                distance.</p>
+
+                            <h3>Leave a Review</h3>
+                            <form class="review-form">
+                                <input type="text" placeholder="Name" required>
+                                <input type="email" placeholder="Email" required>
+                                <div class="star-rating">
+                                    <i class="bx bxs-star" data-rating="1"></i>
+                                    <i class="bx bxs-star" data-rating="2"></i>
+                                    <i class="bx bxs-star" data-rating="3"></i>
+                                    <i class="bx bxs-star" data-rating="4"></i>
+                                    <i class="bx bxs-star" data-rating="5"></i>
+                                </div>
+                                <textarea placeholder="Your Review" required></textarea>
+                                <button type="submit">Post Review</button>
+                            </form>
+
                         </div>
                     </div>
-            
-                    <!-- Course Includes -->
-                    <div class="card p-3">
-                        <h5 class="mb-3">This course includes</h5>
-                        <ul class="list-unstyled">
-                            <li class="icon-text"><i class='bx bx-book-open'></i> <span>Lectures: 30</span></li>
-                            <li class="icon-text"><i class='bx bx-time'></i> <span>Duration: 4h 50m</span></li>
-                            <li class="icon-text"><i class='bx bx-bar-chart-alt-2'></i> <span>Level: Beginner</span></li>
-                            <li class="icon-text"><i class='bx bx-globe'></i> <span>Language: English</span></li>
-                            <li class="icon-text"><i class='bx bx-calendar'></i> <span>Deadline: Nov 30, 2021</span></li>
-                            <li class="icon-text"><i class='bx bx-certification'></i> <span>Certificate: Yes</span></li>
-                        </ul>
-                    </div>
-            
-                    <!-- Recently Viewed -->
-                    <div class="card p-3">
-                        <h5 class="mb-3">Recently Viewed</h5>
-                        <ul class="list-group recently-viewed">
-                            <li class="list-group-item">
-                                <img src="image.png" alt="Course">
-                                <div>
-                                    <a href="" class="mb-1">Fundamentals of Business Analysis</p>
-                                    <small class="text-muted">$130 ⭐ 4.5</small>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <img src="image.png" alt="Course">
-                                <div>
-                                    <a href="" class="mb-1">The Complete Video Production Bootcamp</p>
-                                    <small class="text-muted">$150 ⭐ 4.0</small>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- ------------------- -->
-
-            
                 </div>
+
+                <!-- ---------------------------------------------------- -->
+
+
+                <!-- instructor -->
+
+                <div id="instructor">
+                    <h2>Instructor</h2>
+                    <div class="instructor-profile">
+                        <div class="instructor-image">
+                            <img src="image.png" alt="Instructor's Picture">
+                        </div>
+                        <div class="instructor-details">
+                            <div class="instructor-header">
+                                <span class="instructor-name">Louis Ferguson</span>
+                                <span class="instructor-title">Instructor of Marketing</span>
+                            </div>
+                            <div class="instructor-stats">
+                                <div><i class='bx bx-user'></i> 9.1k<br>Followers</div>
+                                <div><i class='bx bx-star'></i> 4.5<br>Rating</div>
+                                <div><i class='bx bx-book'></i> 29<br>Courses</div>
+                                <div><i class='bx bx-group'></i> 205<br>Students</div>
+                            </div>
+                            <div class="instructor-about">
+                                <p>Fulfilled direction use continual set him propriety continued. Sew met applauded
+                                    favorite deficient engrossed concealed and her. Concluded boy perpetual old
+                                    supposing. Farther related bed and passage comfort civilly. Dashboard see frankness
+                                    objection abilities. As hastened oh produced prospect formerly up am. Placing
+                                    forming nay looking old married few haa. Margaret disposed of add screened rendered
+                                    six say his striking confined.</p>
+
+                                <p>As it so contrasted oh estimating instrument. Size like body someone had. Are conduct
+                                    viewing boy minutes warrant the expense? Tolerably behavior may admit daughters
+                                    offending her ask own. Praise effect wishes change way and any wanted.</p>
+                            </div>
+                            <div class="instructor-contact">
+                                <a href="mailto:hello@email.com"><i class='bx bx-envelope'></i> hello@email.com</a>
+                                <a href="tel:123-456-7890"><i class='bx bx-phone'></i> 123-456-7890</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ---------------------------------------------------- -->
+
+
+                <!-- comment  -->
+
+                <div id="comment">
+                    <h2>Comment</h2>
+
+                </div>
+                <!-- ---------------------------------------------------- -->
+
+
             </div>
 
+            <!-- -------------------------- -->
+
+
+            <!-- flex 2 -->
+            <div id="course-deatils-view-2">
+                <div class="containerView2">
+                    <div class="course-sidebar">
+
+                        <!-- Course Video & Pricing -->
+                        <div class="card">
+                            <div class="course-video">
+                                <video src="/videos/presentation.mp4" controls></video>
+                            </div>
+                            <div class="course-price">
+
+                                <h3><span class="text-muted text-decoration-line-through" th:text="${course.price}"></span>
+                                    <span class="discount"></span></h3>
+
+                                <a href="" class="btn btn-outline-primary btn-custom">Free trial</a>
+                                <a href="" class="btn btn-success btn-custom mt-2">Register</a>
+                            </div>
+                        </div>
+
+                        <!-- Course Includes -->
+                        <div class="card p-3">
+                            <h5 class="mb-3">This course includes</h5>
+                            <ul class="list-unstyled">
+                                <li class="icon-text"><i class='bx bx-book-open'></i> <span>Lectures: 30</span></li>
+                                <li class="icon-text"><i class='bx bx-time'></i> <span>Duration: 4h 50m</span></li>
+                                <li class="icon-text"><i class='bx bx-bar-chart-alt-2'></i> <span>Level: Beginner</span>
+                                </li>
+                                <li class="icon-text"><i class='bx bx-globe'></i> <span>Language: English</span></li>
+                                <li class="icon-text"><i class='bx bx-calendar'></i> <span>Deadline: Nov 30, 2021</span>
+                                </li>
+                                <li class="icon-text"><i class='bx bx-certification'></i> <span>Certificate: Yes</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Recently Viewed -->
+                        <div class="card p-3">
+                            <h5 class="mb-3">Recently Viewed</h5>
+                            <ul class="list-group recently-viewed">
+                                <li class="list-group-item">
+                                    <img src="image.png" alt="Course">
+                                    <div>
+                                        <a href="" class="mb-1">Fundamentals of Business Analysis</p>
+                                            <small class="text-muted">$130 ⭐ 4.5</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <img src="image.png" alt="Course">
+                                    <div>
+                                        <a href="" class="mb-1">The Complete Video Production Bootcamp</p>
+                                            <small class="text-muted">$150 ⭐ 4.0</small>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- ------------------- -->
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- -------------------------- -->
+
+
         </div>
 
-        <!-- -------------------------- -->
 
-
-
-
-        </div>
-
-
-      </section>
     </section>
+</section>
 
-    <!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
-    <footer>
-      <div class="contentFooter">
+<!-- ----------------------------------------------- footer --------------------------------------------------------------- -->
+<footer>
+    <div class="contentFooter">
         <div class="top">
-          <div class="logo-details">
-            <i class="fab fa-slack"></i>
-            <span class="logo_name">AtomTechDM</span>
-          </div>
-          <div class="media-icons">
-            <a href="#"><i class="bx bxl-facebook"></i></a>
-            <a href="#"><i class="bx bxl-twitter"></i></a>
-            <a href="#"><i class="bx bxl-instagram"></i></a>
-            <a href="#"><i class="bx bxl-linkedin"></i></a>
-            <a href="#"><i class="bx bxl-youtube"></i></a>
-          </div>
+            <div class="logo-details">
+                <i class="fab fa-slack"></i>
+                <span class="logo_name">AtomTechDM</span>
+            </div>
+            <div class="media-icons">
+                <a href="#"><i class="bx bxl-facebook"></i></a>
+                <a href="#"><i class="bx bxl-twitter"></i></a>
+                <a href="#"><i class="bx bxl-instagram"></i></a>
+                <a href="#"><i class="bx bxl-linkedin"></i></a>
+                <a href="#"><i class="bx bxl-youtube"></i></a>
+            </div>
         </div>
         <div class="link-boxes">
-          <ul class="box">
-            <li class="link_name">Company</li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Get started</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Services</li>
-            <li><a href="#">App design</a></li>
-            <li><a href="#">Web design</a></li>
-            <li><a href="#">Logo design</a></li>
-            <li><a href="#">Banner design</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Account</li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">My account</a></li>
-            <li><a href="#">Prefrences</a></li>
-            <li><a href="#">Purchase</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Courses</li>
-            <li><a href="#">HTML & CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li><a href="#">Photography</a></li>
-            <li><a href="#">Photoshop</a></li>
-          </ul>
-          <ul class="box input-box">
-            <li class="link_name">Subscribe</li>
-            <li><input type="text" placeholder="Enter your email" /></li>
-            <li><input type="button" value="Subscribe" /></li>
-          </ul>
+            <ul class="box">
+                <li class="link_name">Company</li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Get started</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Services</li>
+                <li><a href="#">App design</a></li>
+                <li><a href="#">Web design</a></li>
+                <li><a href="#">Logo design</a></li>
+                <li><a href="#">Banner design</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Account</li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">My account</a></li>
+                <li><a href="#">Prefrences</a></li>
+                <li><a href="#">Purchase</a></li>
+            </ul>
+            <ul class="box">
+                <li class="link_name">Courses</li>
+                <li><a href="#">HTML & CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+                <li><a href="#">Photography</a></li>
+                <li><a href="#">Photoshop</a></li>
+            </ul>
+            <ul class="box input-box">
+                <li class="link_name">Subscribe</li>
+                <li><input type="text" placeholder="Enter your email"/></li>
+                <li><input type="button" value="Subscribe"/></li>
+            </ul>
         </div>
-      </div>
-      <div class="bottom-details">
+    </div>
+    <div class="bottom-details">
         <div class="bottom_text">
           <span class="copyright_text"
-            >Copyright © 2025 <a href="#">AtomTechDM</a>All rights
+          >Copyright © 2025 <a href="#">AtomTechDM</a>All rights
             reserved</span
           >
-          <span class="policy_terms">
+            <span class="policy_terms">
             <a href="#">Privacy policy</a>
             <a href="#">Terms & condition</a>
           </span>
         </div>
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
-    <script src="/js/courseDetail.js" ></script>
+<!-- ----------------------------------------------- ------------------------------------------------------------------------- -->
+<div id="courseData"
+     th:data-lessons="${lessons}"
+     th:data-subscribed="${subscribed}"
+     th:data-course="${course}"
+>
 
-  </body>
+</div>
+
+<script src="/js/courseDetail.js" >
+
+
+</script>
+
+
+
+
+</body>
 </html>
